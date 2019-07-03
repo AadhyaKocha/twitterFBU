@@ -12,6 +12,8 @@
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
 #import "composeViewController.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -77,6 +79,7 @@
     
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     Tweet *tweet = self.tweets[indexPath.row];
+    cell.tweet = tweet;
     cell.authorName.text = tweet.user.name;
     cell.screenName.text = tweet.user.screenName;
     cell.tweetDate.text = tweet.createdAtString;
@@ -84,7 +87,6 @@
     cell.retweetCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.favoriteCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
-    
     /*
     NSString *baseURLString = tweet.user.profileImage;
     NSString *profileURLString = tweet.user.profileImage;
@@ -101,6 +103,20 @@
     cell.profileImage.image = nil;
     [cell.profileImage setImageWithURL:profileURL];
     
+    if (tweet.favorited == YES) {
+        [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+    }
+    else if (tweet.favorited == NO) {
+        [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+    }
+    
+    if (tweet.retweeted == YES) {
+        [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
+    }
+    else if (tweet.retweeted == NO) {
+        [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    }
+    
     return cell;
 }
 
@@ -115,6 +131,15 @@
     [self.tweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
 }
+
+- (IBAction)logoutButton:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+}
+
 
 /*
 #pragma mark - Navigation

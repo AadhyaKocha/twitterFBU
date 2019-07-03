@@ -154,26 +154,41 @@
                                                     <rect key="frame" x="127" y="225" width="24" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="retweet-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="Jdf-Ys-6WB" eventType="touchUpInside" id="yxB-XT-GQT"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAd-6h-sPM">
-                                                    <rect key="frame" x="56" y="227" width="30" height="25"/>
+                                                    <rect key="frame" x="57" y="225" width="29" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="reply-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapReply:" destination="Jdf-Ys-6WB" eventType="touchUpInside" id="yxo-By-FNN"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyF-dq-2Qf">
                                                     <rect key="frame" x="198" y="223" width="29" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="favor-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapFavorite:" destination="Jdf-Ys-6WB" eventType="touchUpInside" id="asl-lR-b9I"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="authorName" destination="7cz-bt-RVf" id="bc2-nL-RY5"/>
                                             <outlet property="caption" destination="0vn-dh-DAx" id="qwV-9j-shN"/>
+                                            <outlet property="favoriteButton" destination="tyF-dq-2Qf" id="6d0-mw-kin"/>
                                             <outlet property="favoriteCount" destination="Oe3-HA-Kvv" id="VIy-vP-B2A"/>
+                                            <outlet property="favorited" destination="Oe3-HA-Kvv" id="eSb-mb-Nmo"/>
                                             <outlet property="profileImage" destination="UW1-vF-MqY" id="HkS-bG-aFa"/>
+                                            <outlet property="replied" destination="OgR-ES-3do" id="g7F-IK-Po4"/>
+                                            <outlet property="replyButton" destination="GAd-6h-sPM" id="luN-VX-c0a"/>
                                             <outlet property="replyCount" destination="OgR-ES-3do" id="hNY-iZ-1GM"/>
+                                            <outlet property="retweetButton" destination="Lin-WU-ooh" id="aJn-T4-hbn"/>
                                             <outlet property="retweetCount" destination="BiC-Ml-pR1" id="p24-ym-AdY"/>
+                                            <outlet property="retweeted" destination="BiC-Ml-pR1" id="c2H-0S-5Gw"/>
                                             <outlet property="screenName" destination="D2L-Hx-pCf" id="Xsd-Ox-g5E"/>
                                             <outlet property="tweetDate" destination="CeP-9o-x38" id="vQw-e9-kxb"/>
                                         </connections>
@@ -185,6 +200,11 @@
                         <viewLayoutGuide key="safeArea" id="ugE-Ul-H9I"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vze-Me-2rj">
+                            <connections>
+                                <action selector="logoutButton:" destination="Lbl-k5-U4i" id="FEH-dc-nBn"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Compose" image="edit-icon" id="ggX-E3-QoE">
                             <connections>
                                 <segue destination="42j-p3-8wc" kind="presentation" id="KhA-MH-hOc"/>
