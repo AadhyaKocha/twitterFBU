@@ -11,10 +11,13 @@
 #import "TweetCell.h"
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
+#import "composeViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) NSArray *tweets;
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -26,12 +29,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    /*
-     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
-     */
+    [self fetchTweets];
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+}
+
+- (void)fetchTweets {
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
@@ -46,6 +51,11 @@
         }
         [self.tableView reloadData];
     }];
+    
+    // Reload the tableView now that there is new data
+    [self.tableView reloadData];
+    // Tell the refreshControl to stop spinning
+    [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,6 +93,17 @@
     [cell.profileImage setImageWithURL:profileURL];
     
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UINavigationController *navigationController = [segue destinationViewController];
+    composeViewController *composeController = (composeViewController*)navigationController.topViewController;
+    composeController.delegate = self;
+}
+
+- (void)didTweet:(Tweet *)tweet {
+    [self.tweets insertObject:tweet atIndex:0];
+    [self.tableView reloadData];
 }
 
 /*
