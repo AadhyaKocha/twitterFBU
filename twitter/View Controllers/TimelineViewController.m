@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+//View controller has a tableView as a subview
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
@@ -26,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //View controller becomes its dataSource and delegate in viewDidLoad
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -37,14 +39,16 @@
 }
 
 - (void)fetchTweets {
-    // Get timeline
+    // Get timeline by making an API request
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        //whenever ^ is when a block is starting
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            for (Tweet *tweet in tweets) {
+            for (Tweet *tweet in tweets) { //This block allows API manager to come back later to populate data
                 NSString *text = tweet.text;
                 NSLog(@"%@", text);
             }
+            //API manager calls the completion handler passing back data
             self.tweets = tweets;
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
@@ -63,10 +67,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+//numberOfRows returns the number of items returned from the API
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
 
+//cellForRow returns an instance of the custom cell with that reuse identifier with it’s elements populated with data at the index asked for
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
@@ -75,6 +81,9 @@
     cell.screenName.text = tweet.user.screenName;
     cell.tweetDate.text = tweet.createdAtString;
     cell.caption.text = tweet.text;
+    cell.retweetCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
+    cell.favoriteCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
+    cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
     
     /*
     NSString *baseURLString = tweet.user.profileImage;
@@ -95,6 +104,7 @@
     return cell;
 }
 
+#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UINavigationController *navigationController = [segue destinationViewController];
     composeViewController *composeController = (composeViewController*)navigationController.topViewController;

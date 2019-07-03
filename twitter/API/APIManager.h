@@ -14,6 +14,7 @@
 
 + (instancetype)shared;
 
+//API manager calls the completion handler passing back data
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion;
 
