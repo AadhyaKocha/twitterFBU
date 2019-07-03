@@ -239,7 +239,7 @@
                         <viewLayoutGuide key="safeArea" id="Ogq-YZ-rpX"/>
                     </view>
                     <navigationItem key="navigationItem" id="KQd-6Q-8oV">
-                        <barButtonItem key="leftBarButtonItem" title="X" id="lOi-GU-mrn">
+                        <barButtonItem key="leftBarButtonItem" title="X" image="close-icon" id="lOi-GU-mrn">
                             <connections>
                                 <action selector="closeButtonAction:" destination="kTW-Ze-I94" id="521-g8-RUl"/>
                             </connections>
@@ -299,6 +299,7 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="133.33332824707031" height="133.33332824707031"/>
+        <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
         <image name="message-icon" width="30" height="30"/>
