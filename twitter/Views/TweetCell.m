@@ -14,7 +14,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profileImage setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -108,6 +111,10 @@
     self.favoriteCount.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
     self.retweeted.text = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
     self.replied.text = [NSString stringWithFormat:@"%i", self.tweet.replyCount];
+}
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate tweetCell:self didTap:self.tweet.user];
 }
 
 @end

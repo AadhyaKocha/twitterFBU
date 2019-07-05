@@ -15,8 +15,9 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "InfiniteScrollActivityView.h"
+#import "ProfileViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate,TweetCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -102,6 +103,7 @@ InfiniteScrollActivityView *loadingMoreView;
     cell.retweetCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.favoriteCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
+    cell.delegate = self;
     /*
     NSString *baseURLString = tweet.user.profileImage;
     NSString *profileURLString = tweet.user.profileImage;
@@ -133,13 +135,6 @@ InfiniteScrollActivityView *loadingMoreView;
     }
     
     return cell;
-}
-
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    composeViewController *composeController = (composeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
 }
 
 - (void)didTweet:(Tweet *)tweet {
@@ -201,6 +196,27 @@ InfiniteScrollActivityView *loadingMoreView;
             // Code to load more results
             [self loadMoreData];
         }
+    }
+}
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual: @"PublishingTweet"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        composeViewController *composeController = (composeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
+    else if ([segue.identifier isEqual: @"DetailsPage"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        NSDictionary *tweet = self.tweets[indexPath.row];
+        
+        ProfileViewController *detailsViewController = [segue destinationViewController];
+        ProfileViewController.tweet = tweet;
     }
 }
 
