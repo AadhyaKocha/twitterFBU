@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *publishTweet;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closePublishing;
 //UITextviewdelegate
+@property (weak, nonatomic) IBOutlet UILabel *characterLabel;
 
 @end
 
@@ -22,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.composeText.delegate = self;
+    self.composeText.delegate = self;
 }
 - (IBAction)closeButtonAction:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
@@ -39,6 +40,17 @@
         }
     }];
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    int characterLimit = 140;
+    NSString *newText = [self.composeText.text stringByReplacingCharactersInRange:range withString:text];
+    unsigned long charactersLeft = characterLimit - newText.length;
+    //NSLog(@"Character count is: %lu", newText.length);
+    self.characterLabel.text = [NSString stringWithFormat:@"%lu", charactersLeft];
+    
+    return newText.length < characterLimit;
 }
 
 /*
