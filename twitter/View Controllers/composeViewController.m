@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *composeText;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *publishTweet;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closePublishing;
-//UITextviewdelegate
 @property (weak, nonatomic) IBOutlet UILabel *characterLabel;
 
 @end
