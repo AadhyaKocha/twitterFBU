@@ -21,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.composeText.delegate = self;
 }
 - (IBAction)closeButtonAction:(id)sender {
@@ -46,7 +45,6 @@
     int characterLimit = 140;
     NSString *newText = [self.composeText.text stringByReplacingCharactersInRange:range withString:text];
     unsigned long charactersLeft = characterLimit - newText.length;
-    //NSLog(@"Character count is: %lu", newText.length);
     self.characterLabel.text = [NSString stringWithFormat:@"%lu", charactersLeft];
     
     return newText.length < characterLimit;

@@ -61,15 +61,14 @@ InfiniteScrollActivityView *loadingMoreView;
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         //whenever ^ is when a block is starting
         if (tweets) {
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            //NSLog(@"Successfully loaded home timeline");
             for (Tweet *tweet in tweets) { //This block allows API manager to come back later to populate data
                 NSString *text = tweet.text;
-                NSLog(@"%@", text);
             }
             //API manager calls the completion handler passing back data
             self.tweets = tweets;
         } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+            //NSLog(@"Error getting home timeline: %@", error.localizedDescription);
         }
         [self.tableView reloadData];
     }];
