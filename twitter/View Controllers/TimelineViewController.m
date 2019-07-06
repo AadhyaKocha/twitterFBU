@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "InfiniteScrollActivityView.h"
+#import "DetailsViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -102,15 +103,6 @@ InfiniteScrollActivityView *loadingMoreView;
     cell.retweetCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.favoriteCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
-    /*
-    NSString *baseURLString = tweet.user.profileImage;
-    NSString *profileURLString = tweet.user.profileImage;
-    NSString *fullProfileURLString = [baseURLString stringByAppendingString:profileURLString];
-    NSURL *profileURL = [NSURL URLWithString:fullProfileURLString];
-    
-    cell.profileImage.image = nil;
-    [cell.profileImage setImageWithURL:profileURL];
-    */
     
     NSString *profileURLString = tweet.user.profileImage;
     NSURL *profileURL = [NSURL URLWithString:profileURLString];
@@ -137,9 +129,20 @@ InfiniteScrollActivityView *loadingMoreView;
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    composeViewController *composeController = (composeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    if ([segue.identifier isEqualToString: @"publishingSegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        composeViewController *composeController = (composeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString: @"DetailsSegue"]) {
+        
+        DetailsViewController *detailsController = [segue destinationViewController];
+        
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.tweets[indexPath.row];
+        detailsController.tweet = tweet;
+    }
 }
 
 - (void)didTweet:(Tweet *)tweet {
@@ -159,7 +162,6 @@ InfiniteScrollActivityView *loadingMoreView;
 
 -(void)loadMoreData{
     
-    // ... Create the NSURLRequest (myRequest) ...
     NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     
@@ -172,7 +174,6 @@ InfiniteScrollActivityView *loadingMoreView;
         }
         else
         {
-            // Update flag
             self.isMoreDataLoading = false;
             [loadingMoreView stopAnimating];
             [self.tableView reloadData];
@@ -203,15 +204,5 @@ InfiniteScrollActivityView *loadingMoreView;
         }
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
