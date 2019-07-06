@@ -2,7 +2,7 @@
 
 **Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
@@ -48,21 +48,21 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. Making multiple navigation controls and passing information to each without having to copy paste large chucks like that part pof TweetCell.h
+1. Making multiple navigation controls and passing information to each without having to copy paste large chuncks of code like didTapFavorite in TweetCell.h through protocols and delegates.
 2. Git help in pushing, new branches, merging and more.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/ZYMhHLSqtT.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
-I spent several hours on building the profile page for users but it all had to be cancelled because of how many changes I had to make and my APIManager was not being "found" after a while :(
+I spent several hours on building the profile page for users but it all had to be cancelled because of how many changes I had to make and my APIManager was not being "found" after a while :( This also led to a lot of git issues.
 
 ## Credits
 

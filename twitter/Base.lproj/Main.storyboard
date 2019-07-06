@@ -286,22 +286,29 @@
                                     <constraint firstAttribute="height" constant="51" id="h4R-GB-OCv"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oya-LA-jGU">
-                                <rect key="frame" x="83" y="84" width="89" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oya-LA-jGU">
+                                <rect key="frame" x="83" y="84" width="42.5" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="745" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5b-fK-8I1">
-                                <rect key="frame" x="196" y="84" width="137" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="745" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5b-fK-8I1">
+                                <rect key="frame" x="151.5" y="84" width="179" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="Laz-h3-kGf"/>
+                                    <constraint firstAttribute="height" constant="18" id="lTn-JN-8F0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K05-G8-sEE">
-                                <rect key="frame" x="180" y="84" width="14" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K05-G8-sEE">
+                                <rect key="frame" x="135.5" y="84" width="14" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="14" id="5FW-6f-dxf"/>
+                                    <constraint firstAttribute="height" constant="18" id="Bg1-Pf-xzI"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="uRF-XR-OMa"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -373,8 +380,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FDZ-cd-7kf" firstAttribute="leading" secondItem="5Th-OF-9ea" secondAttribute="leading" constant="16" id="29L-r1-dA4"/>
+                            <constraint firstItem="i5b-fK-8I1" firstAttribute="top" secondItem="Oya-LA-jGU" secondAttribute="top" id="C3T-r7-Se4"/>
                             <constraint firstItem="Oya-LA-jGU" firstAttribute="leading" secondItem="FDZ-cd-7kf" secondAttribute="trailing" constant="16" id="SPT-sz-8Hr"/>
                             <constraint firstItem="Oya-LA-jGU" firstAttribute="top" secondItem="FDZ-cd-7kf" secondAttribute="top" id="c5o-NO-cdL"/>
+                            <constraint firstItem="i5b-fK-8I1" firstAttribute="leading" secondItem="K05-G8-sEE" secondAttribute="trailing" constant="2" id="dQR-4j-pZ2"/>
+                            <constraint firstItem="K05-G8-sEE" firstAttribute="top" secondItem="Oya-LA-jGU" secondAttribute="top" id="dha-UF-xV3"/>
+                            <constraint firstItem="K05-G8-sEE" firstAttribute="leading" secondItem="Oya-LA-jGU" secondAttribute="trailing" constant="10" id="hDl-zp-zm6"/>
                             <constraint firstItem="FDZ-cd-7kf" firstAttribute="top" secondItem="5Th-OF-9ea" secondAttribute="top" constant="20" id="lef-7x-skQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Th-OF-9ea"/>
